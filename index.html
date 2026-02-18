@@ -153,46 +153,45 @@
 
     <main>
         <!-- キービジュアル (KV) -->
-        <!-- pb-32で下部に余白を確保し、SCROLL文字被りを防ぐ -->
-        <section class="relative min-h-screen w-full flex flex-col md:flex-row items-center justify-center overflow-hidden pt-20 pb-32">
+        <!-- SCROLL削除に伴いpb-32からpb-20へ調整し、スマホでも間延びしないように -->
+        <section class="relative min-h-screen w-full flex flex-col md:flex-row items-center justify-center overflow-hidden pt-20 pb-20">
             
             <!-- 背景の装飾円 -->
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] border border-[#c5a059] rounded-full opacity-20 pointer-events-none z-0"></div>
 
             <!-- 名前（メイン） -->
-            <div class="z-10 md:absolute md:right-[15%] md:top-[20%] fade-in-section delay-300 mb-12 md:mb-0">
-                <h1 class="tategaki text-5xl md:text-7xl font-medium tracking-wide leading-relaxed h-[400px]">
+            <!-- スマホでは上部に配置、PCでは右側に配置 -->
+            <div class="z-10 md:absolute md:right-[15%] md:top-[20%] fade-in-section delay-300 mb-12 md:mb-0 text-center md:text-left">
+                <h1 class="tategaki text-5xl md:text-7xl font-medium tracking-wide leading-relaxed h-[400px] mx-auto md:mx-0">
                     仲井 千貴
                     <span class="block mt-6 text-sm text-[#c5a059] sans tracking-[0.3em]">KAZUKI NAKAI</span>
                 </h1>
             </div>
 
             <!-- キャッチコピー -->
-            <div class="z-10 mt-8 md:mt-0 md:absolute md:left-[15%] md:bottom-[20%] fade-in-section delay-500 mb-12 md:mb-0">
-                <p class="tategaki-md text-base md:text-xl leading-loose tracking-widest text-gray-700">
-                    次世代の<br>マーケティングを、<br>その手で切り拓く。
+            <!-- スマホでは画像の下に来るように配置順序を考慮（HTML構造上は画像の前に記述されているが、flex-colで縦並びになる） -->
+            <!-- スマホ：名前 -> 画像 -> キャッチコピー の順に見せたい場合はorderクラスを使う手もあるが、ここでは名前 -> キャッチ -> 画像 の順でシンプルに -->
+            <div class="z-10 mt-4 md:mt-0 md:absolute md:left-[15%] md:bottom-[20%] fade-in-section delay-500 mb-10 md:mb-0 px-4 md:px-0">
+                <p class="tategaki-md text-base md:text-xl leading-loose tracking-widest text-gray-700 text-center md:text-left">
+                    次世代の<br class="md:hidden">マーケティングを、<br>その手で切り拓く。
                 </p>
             </div>
 
             <!-- 写真エリア -->
-            <div class="z-0 w-64 h-80 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl">
+            <!-- スマホでも迫力を出すために幅を調整 (w-64 -> w-72) -->
+            <div class="z-0 w-72 h-96 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl mx-auto">
                 <!-- 初期状態はgrayscale, JSで2秒後にgrayscale-0に切り替え -->
                 <img id="profile-img" src="profile.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale color-transition">
                 <!-- 枠線装飾 -->
                 <div class="absolute top-4 left-4 w-full h-full border border-[#c5a059] -z-10"></div>
             </div>
 
-            <!-- スクロール促進 -->
-            <!-- absolute配置だが、pb-32確保済みなので写真と被らない -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50 z-20">
-                <span class="tategaki text-xs tracking-widest mb-2">SCROLL</span>
-                <div class="w-[1px] h-12 bg-gray-400"></div>
-            </div>
+            <!-- SCROLL表記は廃止 -->
         </section>
 
-        <!-- KPI SECTION (NEW) -->
+        <!-- KPI SECTION -->
         <section class="py-24 bg-white relative overflow-hidden">
-            <!-- 和紙っぽい背景テクスチャ演出（CSSグラデーションで擬似的に） -->
+            <!-- 和紙っぽい背景テクスチャ演出 -->
             <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0), repeating-linear-gradient(45deg, #f0f0f0 25%, #fdfcf8 25%, #fdfcf8 75%, #f0f0f0 75%, #f0f0f0); background-position: 0 0, 10px 10px; background-size: 20px 20px;"></div>
             
             <div class="container mx-auto px-6 max-w-4xl relative z-10 fade-in-section">
@@ -204,7 +203,7 @@
                         失敗という名の<br class="md:hidden">KPI
                     </h2>
 
-                    <!-- 縦書き文章（PC）/ 横書き（SP） -->
+                    <!-- 縦書き文章（PC） -->
                     <div class="hidden md:block tategaki h-[400px] text-lg leading-loose tracking-widest text-gray-800 font-medium ml-auto mr-auto border-t border-b border-gray-200 py-8 px-12">
                         遥か高みにある「野望」というゴール。<br><br>
                         そこに到達するための道標こそが、日々のKPIだ。<br>
@@ -215,13 +214,13 @@
                         まだ見ぬ景色が待っている。
                     </div>
 
-                    <!-- SP用テキスト -->
-                    <div class="md:hidden text-left text-base leading-loose tracking-widest text-gray-800 font-medium">
-                        <p class="mb-6">
+                    <!-- 横書き文章（SP）: 読みやすくレイアウト調整 -->
+                    <div class="md:hidden text-left text-base leading-loose tracking-widest text-gray-800 font-medium px-4">
+                        <p class="mb-8">
                             遥か高みにある「野望」というゴール。<br>
                             そこに到達するための道標こそが、<br>日々のKPIだ。
                         </p>
-                        <p class="mb-6">
+                        <p class="mb-8">
                             成功だけを数えても、人は育たない。<br>
                             挑戦し、躓き、また立ち上がる。<br>
                             その「失敗」の数だけ、私は強くなる。
@@ -245,11 +244,11 @@
                 <!-- 最新の経歴 -->
                 <article class="flex flex-col md:flex-row border-b border-gray-200 pb-8 hover:bg-gray-50 transition-colors duration-300 p-4 fade-in-section">
                     <div class="md:w-1/4 mb-2 md:mb-0">
-                        <time class="sans text-[#c5a059] font-medium">2026.02 - Present</time>
-                        <span class="block text-xs text-gray-400 mt-1">WEB広告代理店</span>
+                        <time class="sans text-[#c5a059] font-medium text-lg">2026.02 - Present</time>
+                        <!-- 会社名を削除 -->
                     </div>
                     <div class="md:w-3/4">
-                        <h3 class="text-xl font-medium mb-3">入稿オペレーター見習い</h3>
+                        <h3 class="text-xl font-medium mb-3 mt-1 md:mt-0">入稿オペレーター見習い</h3>
                         <p class="text-sm text-gray-600 leading-loose">
                             デジタルマーケティングの最前線にて、広告入稿の精度とスピードを追求。
                             クライアントの大切な予算を預かる責任感を胸に、AI活用による業務効率化も研究中。
@@ -260,10 +259,10 @@
                 <!-- 過去の経歴 -->
                 <article class="flex flex-col md:flex-row border-b border-gray-200 pb-8 hover:bg-gray-50 transition-colors duration-300 p-4 fade-in-section">
                     <div class="md:w-1/4 mb-2 md:mb-0">
-                        <time class="sans text-gray-400">2025.11 - 2026.02</time>
+                        <time class="sans text-gray-400 text-lg">2025.11 - 2026.02</time>
                     </div>
                     <div class="md:w-3/4">
-                        <h3 class="text-xl font-medium mb-3 text-gray-700">初期研修・実践研修 修了</h3>
+                        <h3 class="text-xl font-medium mb-3 mt-1 md:mt-0 text-gray-700">初期研修・実践研修 修了</h3>
                         <p class="text-sm text-gray-600 leading-loose">
                             介護ソフトメーカー勤務を経て、業界未経験でWEB広告代理店に入社。
                             基礎を徹底的に叩き込み、次なる飛躍への土台を構築。
@@ -286,12 +285,12 @@
 
             <div class="max-w-6xl mx-auto px-6 relative z-10">
                 <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 fade-in-section">
-                    <div>
+                    <div class="mb-8 md:mb-0">
                         <span class="text-[#c5a059] text-xs tracking-[0.3em] block mb-2 sans">VISION</span>
                         <h2 class="text-4xl md:text-5xl font-medium">野望</h2>
                     </div>
-                    <p class="mt-8 md:mt-0 md:max-w-md text-gray-400 text-sm leading-loose text-justify">
-                        「作業者」では終わらない。<br>
+                    <p class="md:max-w-md text-gray-400 text-sm leading-loose text-justify">
+                        単なる作業者では終わらない。<br>
                         経営を支える唯一無二のパートナーへ。
                     </p>
                 </div>
