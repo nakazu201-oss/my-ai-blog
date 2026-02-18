@@ -54,18 +54,19 @@
             transform: translateY(0);
         }
 
-        /* 画像のホバーエフェクト */
+        /* 画像のホバーエフェクト & カラー化アニメーション */
+        .color-transition {
+            transition: filter 2.5s ease-in-out, transform 0.8s ease; /* じわっと色付く */
+        }
+        
         .hover-zoom {
             overflow: hidden;
-        }
-        .hover-zoom img {
-            transition: transform 0.8s ease;
         }
         .hover-zoom:hover img {
             transform: scale(1.05);
         }
 
-        /* --- オープニング演出（旧サイトの霧を継承しつつKNF風に） --- */
+        /* --- オープニング演出 --- */
         #opening-curtain {
             position: fixed;
             top: 0;
@@ -118,6 +119,11 @@
             background-color: var(--color-gold);
         }
 
+        /* 墨文字演出 */
+        .ink-text {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
         /* SP時の調整 */
         @media (max-width: 768px) {
             .tategaki-md {
@@ -147,13 +153,14 @@
 
     <main>
         <!-- キービジュアル (KV) -->
-        <section class="relative min-h-screen w-full flex flex-col md:flex-row items-center justify-center overflow-hidden pt-20 pb-10">
+        <!-- pb-32で下部に余白を確保し、SCROLL文字被りを防ぐ -->
+        <section class="relative min-h-screen w-full flex flex-col md:flex-row items-center justify-center overflow-hidden pt-20 pb-32">
             
             <!-- 背景の装飾円 -->
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] border border-[#c5a059] rounded-full opacity-20 pointer-events-none z-0"></div>
 
             <!-- 名前（メイン） -->
-            <div class="z-10 md:absolute md:right-[15%] md:top-[20%] fade-in-section delay-300">
+            <div class="z-10 md:absolute md:right-[15%] md:top-[20%] fade-in-section delay-300 mb-12 md:mb-0">
                 <h1 class="tategaki text-5xl md:text-7xl font-medium tracking-wide leading-relaxed h-[400px]">
                     仲井 千貴
                     <span class="block mt-6 text-sm text-[#c5a059] sans tracking-[0.3em]">KAZUKI NAKAI</span>
@@ -161,28 +168,74 @@
             </div>
 
             <!-- キャッチコピー -->
-            <div class="z-10 mt-12 md:mt-0 md:absolute md:left-[15%] md:bottom-[20%] fade-in-section delay-500">
+            <div class="z-10 mt-8 md:mt-0 md:absolute md:left-[15%] md:bottom-[20%] fade-in-section delay-500 mb-12 md:mb-0">
                 <p class="tategaki-md text-base md:text-xl leading-loose tracking-widest text-gray-700">
                     次世代の<br>マーケティングを、<br>その手で切り拓く。
                 </p>
             </div>
 
             <!-- 写真エリア -->
-            <div class="z-0 mt-10 md:mt-0 w-64 h-80 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl">
-                <!-- ユーザーの画像をここに配置 -->
-                <img src="profile.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out">
+            <div class="z-0 w-64 h-80 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl">
+                <!-- 初期状態はgrayscale, JSで2秒後にgrayscale-0に切り替え -->
+                <img id="profile-img" src="profile.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale color-transition">
                 <!-- 枠線装飾 -->
                 <div class="absolute top-4 left-4 w-full h-full border border-[#c5a059] -z-10"></div>
             </div>
 
             <!-- スクロール促進 -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50">
+            <!-- absolute配置だが、pb-32確保済みなので写真と被らない -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50 z-20">
                 <span class="tategaki text-xs tracking-widest mb-2">SCROLL</span>
                 <div class="w-[1px] h-12 bg-gray-400"></div>
             </div>
         </section>
 
-        <!-- NEWS / CAREER SECTION -->
+        <!-- KPI SECTION (NEW) -->
+        <section class="py-24 bg-white relative overflow-hidden">
+            <!-- 和紙っぽい背景テクスチャ演出（CSSグラデーションで擬似的に） -->
+            <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0), repeating-linear-gradient(45deg, #f0f0f0 25%, #fdfcf8 25%, #fdfcf8 75%, #f0f0f0 75%, #f0f0f0); background-position: 0 0, 10px 10px; background-size: 20px 20px;"></div>
+            
+            <div class="container mx-auto px-6 max-w-4xl relative z-10 fade-in-section">
+                <div class="flex flex-col items-center text-center">
+                    <span class="text-[#c5a059] text-xs tracking-[0.4em] mb-6 sans">MY PHILOSOPHY</span>
+                    
+                    <!-- 書道風タイトル -->
+                    <h2 class="text-3xl md:text-5xl font-bold mb-12 ink-text leading-snug">
+                        失敗という名の<br class="md:hidden">KPI
+                    </h2>
+
+                    <!-- 縦書き文章（PC）/ 横書き（SP） -->
+                    <div class="hidden md:block tategaki h-[400px] text-lg leading-loose tracking-widest text-gray-800 font-medium ml-auto mr-auto border-t border-b border-gray-200 py-8 px-12">
+                        遥か高みにある「野望」というゴール。<br><br>
+                        そこに到達するための道標こそが、日々のKPIだ。<br>
+                        成功だけを数えても、人は育たない。<br>
+                        挑戦し、躓き、また立ち上がる。<br><br>
+                        その「失敗」の数だけ、私は強くなる。<br>
+                        泥臭く積み上げた数字の向こう側に、<br>
+                        まだ見ぬ景色が待っている。
+                    </div>
+
+                    <!-- SP用テキスト -->
+                    <div class="md:hidden text-left text-base leading-loose tracking-widest text-gray-800 font-medium">
+                        <p class="mb-6">
+                            遥か高みにある「野望」というゴール。<br>
+                            そこに到達するための道標こそが、<br>日々のKPIだ。
+                        </p>
+                        <p class="mb-6">
+                            成功だけを数えても、人は育たない。<br>
+                            挑戦し、躓き、また立ち上がる。<br>
+                            その「失敗」の数だけ、私は強くなる。
+                        </p>
+                        <p>
+                            泥臭く積み上げた数字の向こう側に、<br>
+                            まだ見ぬ景色が待っている。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAREER SECTION -->
         <section class="py-24 md:py-32 px-6 max-w-5xl mx-auto">
             <div class="text-center fade-in-section">
                 <h2 class="section-title">Career History</h2>
@@ -238,7 +291,7 @@
                         <h2 class="text-4xl md:text-5xl font-medium">野望</h2>
                     </div>
                     <p class="mt-8 md:mt-0 md:max-w-md text-gray-400 text-sm leading-loose text-justify">
-                        単なる作業者では終わらない。<br>
+                        「作業者」では終わらない。<br>
                         経営を支える唯一無二のパートナーへ。
                     </p>
                 </div>
@@ -310,9 +363,21 @@
         document.addEventListener('DOMContentLoaded', () => {
             // 1. オープニング演出
             const curtain = document.getElementById('opening-curtain');
+            
+            // プロフィール画像の要素を取得
+            const profileImg = document.getElementById('profile-img');
+
             setTimeout(() => {
                 curtain.classList.add('hidden-curtain');
             }, 2000); // 2秒後にフェードアウト
+
+            // ★ 画像のカラー化（ページロードから2.5秒後 = カーテンが消えた直後あたり）
+            setTimeout(() => {
+                if(profileImg) {
+                    // grayscaleクラスを削除してカラーにする
+                    profileImg.classList.remove('grayscale');
+                }
+            }, 2500);
 
             // 2. スクロール監視（Intersection Observer）
             const observerOptions = {
