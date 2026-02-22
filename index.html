@@ -161,7 +161,6 @@
             </div>
 
             <div class="z-0 w-72 h-96 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl mx-auto">
-                <!-- プロフィール画像を軽量版の profile2.JPG に更新 -->
                 <img id="profile-img" src="profile2.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale color-transition">
                 <div class="absolute top-4 left-4 w-full h-full border border-[#c5a059] -z-10"></div>
             </div>
@@ -276,7 +275,10 @@
                         <div class="bg-[#111111] h-full p-8 md:p-10 flex flex-col justify-start relative overflow-hidden">
                             <div class="relative z-10">
                                 <span class="text-[#c5a059] text-5xl font-light mb-6 block opacity-40 group-hover:opacity-100 transition-opacity en-font">01</span>
-                                <h3 class="text-2xl font-medium mb-1 tracking-widest text-white group-hover:text-[#c5a059] transition-colors leading-tight">スーパー営業マン<br class="hidden md:block">になる</h3>
+                                <!-- タイトルサイズを小さくし、キーワードを金色の発光で強調 -->
+                                <h3 class="text-lg md:text-xl font-medium mb-3 tracking-widest text-white leading-tight">
+                                    <span class="text-[#c5a059] drop-shadow-[0_0_12px_rgba(197,160,89,0.9)] font-bold">スーパー営業マン</span><br class="hidden md:block">になる
+                                </h3>
                                 <span class="text-[10px] text-[#c5a059] opacity-70 en-font uppercase tracking-[0.2em] block mb-4">Super Sales</span>
                                 <p class="text-gray-400 text-sm leading-loose text-justify">
                                     WEB広告運用に留まらず、ウェブマーケティング全体を俯瞰。顧客の経営課題を共に解決し、事業成長を牽引するパートナーとなる。
@@ -290,7 +292,10 @@
                         <div class="bg-[#111111] h-full p-8 md:p-10 flex flex-col justify-start relative overflow-hidden">
                             <div class="relative z-10">
                                 <span class="text-[#c5a059] text-5xl font-light mb-6 block opacity-40 group-hover:opacity-100 transition-opacity en-font">02</span>
-                                <h3 class="text-2xl font-medium mb-1 tracking-widest text-white group-hover:text-[#c5a059] transition-colors leading-tight">クリエイターの<br class="hidden md:block">目を持つ</h3>
+                                <!-- タイトルサイズを小さくし、キーワードを金色の発光で強調 -->
+                                <h3 class="text-lg md:text-xl font-medium mb-3 tracking-widest text-white leading-tight">
+                                    <span class="text-[#c5a059] drop-shadow-[0_0_12px_rgba(197,160,89,0.9)] font-bold">クリエイター</span>の<br class="hidden md:block">目を持つ
+                                </h3>
                                 <span class="text-[10px] text-[#c5a059] opacity-70 en-font uppercase tracking-[0.2em] block mb-4">Creator's Perspective</span>
                                 <p class="text-gray-400 text-sm leading-loose text-justify">
                                     LP作成、写真撮影、動画制作など、自らの手を動かしクリエイターとなる。現場視点を持つからこそ描ける、解像度の高いディレクションを提供する。
@@ -304,7 +309,10 @@
                         <div class="bg-[#111111] h-full p-8 md:p-10 flex flex-col justify-start relative overflow-hidden">
                             <div class="relative z-10">
                                 <span class="text-[#c5a059] text-5xl font-light mb-6 block opacity-40 group-hover:opacity-100 transition-opacity en-font">03</span>
-                                <h3 class="text-2xl font-medium mb-1 tracking-widest text-white group-hover:text-[#c5a059] transition-colors leading-tight">AIで能力を<br class="hidden md:block">最大化させる</h3>
+                                <!-- タイトルサイズを小さくし、キーワードを金色の発光で強調 -->
+                                <h3 class="text-lg md:text-xl font-medium mb-3 tracking-widest text-white leading-tight">
+                                    <span class="text-[#c5a059] drop-shadow-[0_0_12px_rgba(197,160,89,0.9)] font-bold">AI</span>で能力を<br class="hidden md:block">最大化させる
+                                </h3>
                                 <span class="text-[10px] text-[#c5a059] opacity-70 en-font uppercase tracking-[0.2em] block mb-4">Maximize by AI</span>
                                 <p class="text-gray-400 text-sm leading-loose text-justify">
                                     個人のスキルと経験を、AIの力で劇的にスケールさせる。最新技術を駆使し、圧倒的な品質と速度を伴う次世代のビジネスモデルを提案する。
@@ -372,9 +380,18 @@
         </section>
 
         <!-- FOOTER -->
-        <footer class="bg-white py-12 px-6 text-center border-t border-gray-100">
+        <footer class="bg-white py-12 px-6 text-center border-t border-gray-100 relative">
             <div class="fade-in-section flex flex-col items-center">
-                <!-- アイコン画像も軽量版の profile2.JPG に更新 -->
+                
+                <!-- ★ トップに戻るボタン ★ -->
+                <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="mb-16 group flex flex-col items-center justify-center focus:outline-none">
+                    <span class="text-gray-400 group-hover:text-[#111111] transition-colors duration-300 text-xl mb-2 transform group-hover:-translate-y-1">↑</span>
+                    <span class="text-[10px] tracking-[0.3em] text-gray-400 group-hover:text-[#111111] transition-colors duration-300 en-font uppercase relative">
+                        Back to Top
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-[#111111] transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                    </span>
+                </button>
+
                 <img src="profile2.JPG" alt="Icon" loading="lazy" class="w-10 h-10 rounded-full grayscale opacity-50 mb-4 object-cover">
                 <p class="text-[10px] text-gray-400 tracking-widest sans">
                     &copy; 2026 KAZUKI NAKAI. All Rights Reserved.
@@ -383,6 +400,17 @@
         </footer>
 
     </main>
+
+    <!-- ★ 画面下部追従ボタン（フローティングナビゲーション） ★ -->
+    <div id="floating-banner" class="fixed bottom-0 left-0 w-full bg-[#111111]/85 backdrop-blur-md border-t border-[#c5a059]/30 z-[100] py-3 px-6 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] transition-all duration-500 transform translate-y-0 opacity-100">
+        <div class="max-w-4xl mx-auto flex justify-center items-center">
+            <!-- aタグではなくbuttonタグを使うことで、スマホブラウザ特有の「URLハッシュによるジャンプバグ」を完全回避 -->
+            <button id="floating-link" class="flex items-center space-x-3 group py-2 focus:outline-none">
+                <span class="text-xs md:text-sm text-gray-300 tracking-[0.2em] group-hover:text-[#c5a059] transition-colors font-medium">クリエイティブポートフォリオはこちら</span>
+                <span class="text-[#c5a059] text-lg font-bold animate-bounce mt-1">↓</span>
+            </button>
+        </div>
+    </div>
 
     <script>
         // 【修正】ブラウザのジャンプ履歴を完全に無効化
@@ -433,12 +461,47 @@
             const fadeElements = document.querySelectorAll('.fade-in-section');
             fadeElements.forEach(el => observer.observe(el));
 
-            // 【追加】安全装置（フォールバック）
+            // 安全装置（フォールバック）
             setTimeout(() => {
                 fadeElements.forEach(el => {
                     el.classList.add('is-visible');
                 });
             }, 3500);
+
+            // ★ 追従バナーのスクロール制御（JSのみで移動） ★
+            const floatingLink = document.getElementById('floating-link');
+            if (floatingLink) {
+                floatingLink.addEventListener('click', () => {
+                    const target = document.getElementById('creative-portfolio');
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+
+            // ★ 追従バナーの表示/非表示制御 ★
+            const floatingBanner = document.getElementById('floating-banner');
+            const creativePortfolioSection = document.getElementById('creative-portfolio');
+
+            if (floatingBanner && creativePortfolioSection) {
+                const bannerObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Creative Portfolioセクションが見えたらバナーを下に隠す
+                            floatingBanner.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+                        } else {
+                            // 見えなくなったらバナーを再表示
+                            floatingBanner.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.05 // 5%でも見えたら発火
+                });
+
+                bannerObserver.observe(creativePortfolioSection);
+            }
         });
     </script>
 </body>
