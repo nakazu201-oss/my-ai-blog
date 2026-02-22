@@ -161,7 +161,8 @@
             </div>
 
             <div class="z-0 w-72 h-96 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl mx-auto">
-                <img id="profile-img" src="profile.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale color-transition">
+                <!-- プロフィール画像を軽量版の profile2.JPG に更新 -->
+                <img id="profile-img" src="profile2.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale color-transition">
                 <div class="absolute top-4 left-4 w-full h-full border border-[#c5a059] -z-10"></div>
             </div>
         </section>
@@ -253,7 +254,6 @@
 
         <!-- ★ 新生・AMBITION SECTION ★ -->
         <section class="py-32 bg-[#0a0a0a] text-white relative overflow-hidden" id="ambition">
-            <!-- 修正: 重いぼかし処理(blur)をPCのみ(hidden md:block)にしてスマホ描画を劇的に軽くする -->
             <div class="hidden md:block absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#c5a059] rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none"></div>
             <div class="hidden md:block absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#c5a059] rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
 
@@ -346,7 +346,6 @@
                     <div class="absolute inset-0 bg-[#c5a059] blur-xl opacity-30 animate-pulse rounded-sm group-hover/btn:opacity-60 transition-opacity duration-500"></div>
                     
                     <!-- ボタン本体 -->
-                    <!-- group-hoverで浮き上がり、active(クリック時)で少し沈む -->
                     <div class="relative flex items-center bg-[#c5a059] text-[#111111] transition-all duration-300 transform group-hover/btn:-translate-y-1 group-hover/btn:shadow-[0_15px_30px_-10px_rgba(197,160,89,0.6)] active:translate-y-0 active:scale-95 overflow-hidden">
                         
                         <!-- ホバー時の光沢スライドエフェクト -->
@@ -375,8 +374,8 @@
         <!-- FOOTER -->
         <footer class="bg-white py-12 px-6 text-center border-t border-gray-100">
             <div class="fade-in-section flex flex-col items-center">
-                <!-- 画面外の画像は loading="lazy" で遅延読み込み（軽量化） -->
-                <img src="profile.JPG" alt="Icon" loading="lazy" class="w-10 h-10 rounded-full grayscale opacity-50 mb-4 object-cover">
+                <!-- アイコン画像も軽量版の profile2.JPG に更新 -->
+                <img src="profile2.JPG" alt="Icon" loading="lazy" class="w-10 h-10 rounded-full grayscale opacity-50 mb-4 object-cover">
                 <p class="text-[10px] text-gray-400 tracking-widest sans">
                     &copy; 2026 KAZUKI NAKAI. All Rights Reserved.
                 </p>
@@ -416,7 +415,6 @@
             }, 2500);
 
             // スクロール監視（ふわっと表示）
-            // 修正：WebViewでも反応しやすいように rootMargin を広めに設定
             const observerOptions = {
                 root: null,
                 rootMargin: '100px 0px',
@@ -436,8 +434,6 @@
             fadeElements.forEach(el => observer.observe(el));
 
             // 【追加】安全装置（フォールバック）
-            // アプリ内ブラウザのバグで「真っ白」のままになるのを防ぐため、
-            // ページを開いてから3.5秒後には、画面外の要素も含めてすべて表示状態にする
             setTimeout(() => {
                 fadeElements.forEach(el => {
                     el.classList.add('is-visible');
