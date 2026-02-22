@@ -161,7 +161,6 @@
             </div>
 
             <div class="z-0 w-72 h-96 md:w-[400px] md:h-[550px] relative fade-in-section hover-zoom shadow-2xl mx-auto">
-                <!-- KV画像なのでloading="lazy"は付けない（最優先読み込み） -->
                 <img id="profile-img" src="profile.JPG" alt="Kazuki Nakai" class="w-full h-full object-cover grayscale color-transition">
                 <div class="absolute top-4 left-4 w-full h-full border border-[#c5a059] -z-10"></div>
             </div>
@@ -318,8 +317,7 @@
         </section>
 
         <!-- ★ クリエイティブポートフォリオへの特大CTA ★ -->
-        <!-- 修正：スマホの重さ対策のため bg-scroll にし、PC(md:)の時だけ bg-fixed を適用 -->
-        <section id="creative-portfolio" class="relative py-48 overflow-hidden cursor-pointer group fade-in-section bg-scroll md:bg-fixed" style="background-image: url('P5250215 1.jpg'); background-position: center; background-size: cover;" onclick="window.open('https://nakazu201-oss.github.io/photo-portfolio/', '_blank', 'noopener,noreferrer')">
+        <section id="creative-portfolio" class="relative py-48 overflow-hidden cursor-pointer group fade-in-section bg-scroll md:bg-fixed" style="background-image: url('P52502152.jpg'); background-position: center; background-size: cover;" onclick="window.open('https://nakazu201-oss.github.io/photo-portfolio/', '_blank', 'noopener,noreferrer')">
             
             <!-- 上下の細いゴールドライン装飾 -->
             <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c5a059] to-transparent opacity-50"></div>
@@ -374,7 +372,7 @@
         </section>
 
         <!-- FOOTER -->
-        <footer class="bg-white py-12 px-6 text-center border-t border-gray-100 pb-24">
+        <footer class="bg-white py-12 px-6 text-center border-t border-gray-100">
             <div class="fade-in-section flex flex-col items-center">
                 <!-- 画面外の画像は loading="lazy" で遅延読み込み（軽量化） -->
                 <img src="profile.JPG" alt="Icon" loading="lazy" class="w-10 h-10 rounded-full grayscale opacity-50 mb-4 object-cover">
@@ -385,18 +383,6 @@
         </footer>
 
     </main>
-
-    <!-- ★ 画面下部追従ボタン（フローティングナビゲーション） ★ -->
-    <!-- id="floating-banner" を追加し、表示制御用のクラスを設定 -->
-    <div id="floating-banner" class="fixed bottom-0 left-0 w-full bg-[#111111]/85 backdrop-blur-md border-t border-[#c5a059]/30 z-[100] py-3 px-6 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] transition-all duration-500 transform translate-y-0 opacity-100">
-        <div class="max-w-4xl mx-auto flex justify-center items-center">
-            <!-- hrefは残しつつJSで制御。矢印をシンプルにし、animate-bounceでバウンドさせる -->
-            <a href="#creative-portfolio" id="floating-link" class="flex items-center space-x-3 group py-2">
-                <span class="text-xs md:text-sm text-gray-300 tracking-[0.2em] group-hover:text-[#c5a059] transition-colors font-medium">クリエイティブポートフォリオはこちら</span>
-                <span class="text-[#c5a059] text-lg font-bold animate-bounce mt-1">↓</span>
-            </a>
-        </div>
-    </div>
 
     <script>
         // 【エンジニア担当】スクロール位置の初期化と勝手なジャンプの防止
@@ -438,44 +424,6 @@
 
             const fadeElements = document.querySelectorAll('.fade-in-section');
             fadeElements.forEach(el => observer.observe(el));
-
-
-            // 【追加】追従バナーのスムーズスクロール制御（URLのハッシュ書き換えによるジャンプ防止）
-            const floatingLink = document.getElementById('floating-link');
-            if (floatingLink) {
-                floatingLink.addEventListener('click', (e) => {
-                    e.preventDefault(); // デフォルトのリンク移動を無効化
-                    const target = document.getElementById('creative-portfolio');
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' }); // スムーズにスクロール
-                    }
-                });
-            }
-
-            // 【追加】追従バナーの表示/非表示制御（セクション到達時に消す）
-            const floatingBanner = document.getElementById('floating-banner');
-            const creativePortfolioSection = document.getElementById('creative-portfolio');
-
-            if (floatingBanner && creativePortfolioSection) {
-                const bannerObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Creative Portfolioセクションが見えたらバナーを下に隠す
-                            floatingBanner.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
-                        } else {
-                            // 見えなくなったらバナーを再表示
-                            floatingBanner.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
-                        }
-                    });
-                }, {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.05 // 5%でも見えたら発火
-                });
-
-                bannerObserver.observe(creativePortfolioSection);
-            }
-
         });
     </script>
 </body>
